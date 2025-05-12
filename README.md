@@ -1,46 +1,62 @@
 # Multi-Agent Vacuum Cleaner Simulation
 
-This project simulates a multi-agent environment where several vacuum robots clean a dirt-filled grid. Two strategies are implemented:
+This project simulates multiple intelligent robot vacuum cleaners navigating and cleaning a dirt-filled grid. The simulation compares two agent strategies:
 
-- `independent_agents.py`: Robots wander randomly with basic collision avoidance.
-- `coordinated_agents.py`: Robots share a global map and navigate toward the nearest reachable dirt.
+- **Independent Agents**: Each robot acts randomly and independently.
+- **Coordinated Agents**: Robots share a global map and plan more efficiently to avoid redundancy.
+
+## Features
+
+- Grid-based environment with dirt particles
+- Tkinter-based visual interface
+- Two agent strategies (`independent` and `coordinated`)
+- Collision avoidance logic
+- Shared map coordination for cooperative agents
+- Real-time performance data recording
+- Path heatmap generation with seaborn
+- Reproducible experiments via fixed random seed
 
 ## Project Structure
+├── core_components.py # Robot, Dirt, and drawing logic
+├── strategy_independent.py # Independent strategy class
+├── strategy_coordinated.py # Coordinated strategy class
+├── simulation_core.py # Common createObjects and moveIt
+├── data_logger.py # Records data and heatmap
+├── main_runner.py # Unified runner with strategy selection
+├── independent_agents.py # Shortcut to run independent strategy
+├── coordinated_agents.py # Shortcut to run coordinated strategy
 
-- `core_components.py`: Common classes (Bot, Dirt, avoid logic, sensors, etc.)
-- `independent_agents.py`: Non-coordinated agent behavior.
-- `coordinated_agents.py`: Map-sharing and dirt-targeting agent logic.
+## 🚀 Usage
 
-## Requirements
+Run one of the following scripts to start a simulation:
 
-Run this to install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Running the Simulation
-
-Use the following commands:
 
 ```bash
 python independent_agents.py
-```
-
-or
-
-```bash
 python coordinated_agents.py
 ```
 
-## Notes
+Or run manually:
+```bash
+python main_runner.py independent
+python main_runner.py coordinated
+```
 
-- Window canvas: 990x990
-- Bots are square-shaped with 8 directional sensors.
-- Dirt regenerates randomly across the grid in fixed zones.
-- Robots have avoidance logic and movement animation.
 
-## Notice
+## Outputs
 
-This code was developed as part of a coursework project for the Designing Intelligent Agents module (COMP4105) at the University of Nottingham.
+- `cleaning_data.csv`: recorded metrics for each robot every step
+- `*_path_heatmap.png`: visual heatmaps of agent movement paths
+
+## Experiments
+
+You can modify the number of agents or map layout inside `main_runner.py` or `simulation_core.py`.
+
+## Reproducibility
+
+We use fixed seeds (`random.seed(42)` and `np.random.seed(42)`) to ensure consistent behavior across runs.
+
+## Note
+
+Coursework submission for MSc Computer Science COMP4105 — University of Nottingham
 
