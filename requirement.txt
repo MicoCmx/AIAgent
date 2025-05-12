@@ -1,2 +1,3 @@
 numpy
-tk
+matplotlib
+seaborn

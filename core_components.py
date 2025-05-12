@@ -52,7 +52,7 @@ class Bot:
         self.x += self.sl * math.cos(self.theta) * dt
         self.y += self.sl * math.sin(self.theta) * dt
 
-        # 边界检测与折返（考虑方形尺寸）
+        # Boundary checking and bouncing (considering square size)
         margin = 45
         bounced = False
         if self.x < margin:
@@ -87,7 +87,7 @@ class Bot:
         )
 
     def draw(self, canvas):
-        # 主体轮廓（保留原来样式）
+        # Main body outline (keep original style)
         points = [(self.x + 30 * math.sin(self.theta)) - 30 * math.sin((math.pi / 2.0) - self.theta),
                   (self.y - 30 * math.cos(self.theta)) - 30 * math.cos((math.pi / 2.0) - self.theta),
                   (self.x - 30 * math.sin(self.theta)) - 30 * math.sin((math.pi / 2.0) - self.theta),
@@ -98,7 +98,7 @@ class Bot:
                   (self.y - 30 * math.cos(self.theta)) + 30 * math.cos((math.pi / 2.0) - self.theta)]
         canvas.create_polygon(points, fill=self.color, tags=self.name)
 
-        # 中心圆、轮子
+        # Center circle and wheels
         canvas.create_oval(self.x - 16, self.y - 16, self.x + 16, self.y + 16, fill="gold", tags=self.name)
         canvas.create_oval(self.x - 30 * math.sin(self.theta) - 3, self.y + 30 * math.cos(self.theta) - 3,
                            self.x - 30 * math.sin(self.theta) + 3, self.y + 30 * math.cos(self.theta) + 3,
@@ -107,14 +107,14 @@ class Bot:
                            self.x + 30 * math.sin(self.theta) + 3, self.y - 30 * math.cos(self.theta) + 3,
                            fill="green", tags=self.name)
 
-        # 8个传感器点，始终相对机器人方向固定分布
+        # 8 sensor points, fixed relative to robot orientation
         d = 30
-        # 四边中点
+        # Midpoints of four edges
         front = (self.x + d * math.cos(self.theta), self.y + d * math.sin(self.theta))
         back = (self.x - d * math.cos(self.theta), self.y - d * math.sin(self.theta))
         left = (self.x - d * math.sin(self.theta), self.y + d * math.cos(self.theta))
         right = (self.x + d * math.sin(self.theta), self.y - d * math.cos(self.theta))
-        # 四角点
+        # Four corner points
         dx = d * math.cos(self.theta)
         dy = d * math.sin(self.theta)
         lx = d * math.sin(self.theta)
@@ -140,7 +140,7 @@ class Bot:
 
 
     def avoidOthers(self, agents):
-        # 优先找到最近的其他机器人
+        # Prioritize finding the nearest other robot
         nearest = None
         min_dist = float('inf')
         for other in agents:

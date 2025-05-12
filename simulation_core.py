@@ -25,7 +25,7 @@ def createObjects(canvas, num_agents, brain_factory):
     count = StatsCounter(num_agents)
     shared_map = np.zeros((100, 100), dtype=int)
 
-    # dirt生成
+    # Generate dirt
     i = 0
     for xx in range(10):
         for _ in range(50 + random.randint(-10, 10)):
@@ -69,7 +69,7 @@ def createObjects(canvas, num_agents, brain_factory):
         bot.x = x
         bot.y = y
 
-        # 创建策略 brain
+        # Create strategy brain
         brain = brain_factory(bot, shared_map) if shared_map is not None else brain_factory(bot)
         bot.setBrain(brain)
         agents.append(bot)

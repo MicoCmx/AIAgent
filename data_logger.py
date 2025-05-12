@@ -3,10 +3,10 @@ import csv
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# 确保输出目录存在
+# Ensure the output directory exists
 os.makedirs("outputs", exist_ok=True)
 
-# 路径记录器
+# Path logger
 paths = {}
 
 def init_paths(agents):
