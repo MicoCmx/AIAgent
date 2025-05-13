@@ -33,6 +33,30 @@ def plot_agent_barplot(indep_file, coord_file):
     plt.savefig("outputs/agent_barplot.png")
     plt.close()
 
+def plot_trajectories(indep_file, coord_file):
+    for file, label in [(indep_file, "Independent"), (coord_file, "Coordinated")]:
+        df = pd.read_csv(file)
+        plt.figure(figsize=(6, 6))
+        for bot in df["bot_name"].unique():
+            bot_df = df[df["bot_name"] == bot]
+            plt.plot(bot_df["x"], bot_df["y"], label=bot, alpha=0.7)
+        plt.title(f"Agent Trajectories - {label}")
+        plt.xlabel("X")
+        plt.ylabel("Y")
+        plt.legend()
+        plt.grid(True)
+        plt.axis("equal")
+        outname = f"outputs/trajectory_{label.lower()}.png"
+        plt.tight_layout()
+        plt.savefig(outname)
+        plt.close()
+
+
 if __name__ == "__main__":
-    plot_cleaning_progress("outputs/cleaning_data_independent.csv", "outputs/cleaning_data_coordinated.csv")
-    plot_agent_barplot("outputs/cleaning_data_independent.csv", "outputs/cleaning_data_coordinated.csv")
+    indep_csv = "outputs/cleaning_data_independent.csv"
+    coord_csv = "outputs/cleaning_data_coordinated.csv"
+
+    plot_cleaning_progress(indep_csv, coord_csv)
+    plot_agent_barplot(indep_csv, coord_csv)
+    plot_trajectories(indep_csv, coord_csv)
+
