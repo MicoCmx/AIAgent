@@ -10,12 +10,29 @@ This project simulates multiple intelligent robot vacuum cleaners navigating and
 
 - Grid-based environment with dirt particles  
 - Tkinter-based visual interface  
+- Adjustable number of agents
 - Two agent strategies (`independent` and `coordinated`)  
 - Collision avoidance logic  
-- Shared map coordination for cooperative agents  
+- Shared map coordination for cooperative agents
+- Reproducible experiments via fixed random seed  
 - Real-time performance data recording  
 - Path heatmap generation with seaborn  
-- Reproducible experiments via fixed random seed  
+- Heatmap + trajectory visualization
+- Dirt cleaning logs (CSV)
+- Automatic generation of plots (efficiency, barplots)
+
+## Requirements
+
+- Python 3.10+
+- numpy
+- matplotlib
+- seaborn
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Project Structure
 
@@ -25,6 +42,7 @@ This project simulates multiple intelligent robot vacuum cleaners navigating and
 ├── strategy_coordinated.py    # Coordinated strategy class  
 ├── simulation_core.py         # Common createObjects and moveIt  
 ├── data_logger.py             # Records data and heatmap  
+├── visualise.py               # Generate visual graphics
 ├── main_runner.py             # Unified runner with strategy selection  
 ├── independent_agents.py      # Shortcut to run independent strategy  
 └── coordinated_agents.py      # Shortcut to run coordinated strategy  
@@ -46,10 +64,19 @@ python main_runner.py independent
 python main_runner.py coordinated
 ```
 
+Generate Visualisations:
+
+```bash
+python visualise.py
+```
+
 ## Outputs
 
-- `cleaning_data.csv`: recorded metrics for each robot every step
-- `*_path_heatmap.png`: visual heatmaps of agent movement paths
+- `outputs/cleaning_data_*.csv`: agent cleaning logs 
+- `outputs/*heatmap.png`: path heatmaps 
+- `outputs/*trajectory.png`: trajectory plots 
+- `outputs/cleaning_progress_plot.png`: overall efficiency 
+- `outputs/agent_barplot.png`: per-agent performance
 
 ## Experiments
 
@@ -62,3 +89,11 @@ This Project use fixed seeds (`random.seed(42)` and `np.random.seed(42)`) to ens
 ## Note
 
 Coursework submission for MSc Computer Science COMP4105 — University of Nottingham
+
+## Report
+A full report with analysis and results is available in the repository：https://www.overleaf.com/read/wvthpcyjgyjn#9a1cbf
+
+## GitHub
+Project repository: https://github.com/MicoCmx/AIAgent.git
+
+Author: Mingxin Cao, University of Nottingham

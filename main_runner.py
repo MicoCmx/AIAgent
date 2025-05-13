@@ -19,17 +19,19 @@ def run_simulation(strategy_name: str, num_agents=5):
         cmap = "Reds"
         title = "Independent Agents Path Heatmap"
         file = "outputs/independent_path_heatmap.png"
+        data_title = "outputs/cleaning_data_independent.csv"
     elif strategy_name == "coordinated":
         print("Running Coordinated Strategy...")
         brain_factory = lambda bot, shared_map: CoordinatedBrain(bot, shared_map)
         cmap = "Blues"
         title = "Coordinated Agents Path Heatmap"
         file = "outputs/coordinated_path_heatmap.png"
+        data_title = "outputs/cleaning_data_coordinated.csv"
     else:
         raise ValueError("Unknown strategy: choose 'independent' or 'coordinated'")
 
     agents, passiveObjects, count, shared_map = createObjects(canvas, num_agents, brain_factory)
-    moveIt(canvas, agents, passiveObjects, count, heatmap_title=title, heatmap_file=file, cmap=cmap)
+    moveIt(canvas, agents, passiveObjects, count, heatmap_title=title, heatmap_file=file, cleaning_data_title = data_title, cmap=cmap)
     window.mainloop()
 
 if __name__ == "__main__":

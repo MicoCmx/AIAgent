@@ -78,7 +78,7 @@ def createObjects(canvas, num_agents, brain_factory):
     init_paths(agents)
     return agents, passiveObjects, count, shared_map
 
-def moveIt(canvas, agents, passiveObjects, count, heatmap_title="Path Heatmap", heatmap_file="path_heatmap.png", cmap="Blues", max_steps=1000):
+def moveIt(canvas, agents, passiveObjects, count, heatmap_title="Path Heatmap", heatmap_file="path_heatmap.png", cleaning_data_title = "outputs/cleaning_data.csv", cmap="Blues", max_steps=1000):
     def step(current_step=0, passive=passiveObjects):
         if current_step >= max_steps or not passive:
             print("--- Simulation Complete ---")
@@ -95,7 +95,7 @@ def moveIt(canvas, agents, passiveObjects, count, heatmap_title="Path Heatmap", 
             bot.thinkAndAct(agents, passive)
             bot.update(canvas, passive, 1.0)
             passive = bot.collectDirt(canvas, passive, count)
-            record_data(bot, current_step, count)
+            record_data(bot, current_step, count, cleaning_data_title)
             record_path(bot)
 
         canvas.after(50, step, current_step + 1, passive)
